@@ -6,9 +6,9 @@ import express, { Express, Request, Response } from 'express';
 const app: Express = express();
 const port = 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  throw new Error("hhahaha");
-  res.send('Expressss + TypeScript Server');
+app.get('/ping', (req: Request, res: Response) => {
+  // throw new Error("hhahaha");
+  res.send('pong');
 });
 
 
