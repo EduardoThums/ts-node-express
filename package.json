@@ -14,10 +14,12 @@
   "description": "",
   "dependencies": {
     "@codegenie/serverless-express": "^4.16.0",
+    "config": "^3.3.12",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
     "esbuild": "^0.24.1",
