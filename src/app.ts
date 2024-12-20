@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import { hello } from '@services/a';
 // import dotenv from 'dotenv';
 
 // dotenv.config();
@@ -8,6 +9,7 @@ const port = 3000;
 
 app.get('/ping', (req: Request, res: Response) => {
   // throw new Error("hhahaha");
+  hello()
   res.send('pong');
 });
 
