@@ -11,6 +11,12 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Expressss + TypeScript Server');
 });
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+
+if (!process.env.LAMBDA_TASK_ROOT) {
+  app.listen(port, () => {
+    console.log(`[server]: Server is running at http://localhost:${port}`);
+  });
+  
+}
+
+export default app

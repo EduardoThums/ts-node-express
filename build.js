@@ -1,10 +1,10 @@
 const { build } = require("esbuild");
 
 build({
-entryPoints: ["src/index.ts"],
+entryPoints: ["src/lambda.ts"],
 bundle: true,
 // minify: true,
-outfile: "dist/index.js",
+outfile: "dist/lambda.js",
 platform: 'node', // for ESM
 format: "esm",
 sourcemap: true

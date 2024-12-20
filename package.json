@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "node build.js",
-    "start": "tsx watch src/index.ts",
+    "start": "tsx watch src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@codegenie/serverless-express": "^4.16.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
