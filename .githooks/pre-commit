@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Validate any rules before the commit
+
+set -e
+
+echo "rodando"
+npm run lint
