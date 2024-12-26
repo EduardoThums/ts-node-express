@@ -4,6 +4,7 @@ import config from 'config';
 // import { configure as initLog } from 'cwilog';
 import { configure } from 'cwisite';
 import { cache } from 'cwisite/cache';
+// import { configure } from 'cwilog';
 // import { hello } from '@services/a';
 // import dotenv from 'dotenv';
 

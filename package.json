@@ -19,8 +19,7 @@
   "dependencies": {
     "@codegenie/serverless-express": "^4.16.0",
     "config": "^3.3.12",
-    "cwilog": "file:../cwilog",
-    "cwisite": "file:../cwisite",
+    "cwisite": "git+https://git.cwi.com.br/coca-cola/node-framework/cwisite.git#main",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
