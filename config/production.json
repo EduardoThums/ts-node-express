@@ -1,10 +1,4 @@
 {
-    "Customer": {
-      "dbConfig": {
-        "host": "prod-db-server"
-      },
-      "credit": {
-        "initialDays": 30
-      }
-    }
-  }
+  "LOG_LEVEL": "INFO",
+  "PORT": 3000
+}

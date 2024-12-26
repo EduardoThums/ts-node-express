@@ -18,15 +18,12 @@
   "description": "",
   "dependencies": {
     "@codegenie/serverless-express": "^4.16.0",
-    "config": "^3.3.12",
     "cwisite": "git+https://git.cwi.com.br/coca-cola/node-framework/cwisite.git#main",
-    "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
-    "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.2",
     "@typescript-eslint/eslint-plugin": "^8.18.1",
