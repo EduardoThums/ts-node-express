@@ -8,6 +8,7 @@ configure(app);
 
 app.get('/ping', cache(100), (req: Request, res: Response) => {
   console.log(app.locals.config.get('LOG_LEVEL'));
+  console.log(app.locals.config.get('DB_PASSWORD'));
 
   res.send('pong');
 });
