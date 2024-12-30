@@ -1,7 +1,7 @@
 import express, { Express, Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 // import { configure } from 'cwisite';
-import { cache } from 'cwisite/cache';
-import { configure as configureLogger } from 'cwilog';
+// import { cache } from 'cwisite/cache';
+// import { configure as configureLogger } from 'cwilog';
 // import { configure as configureSecrets } from 'cwisecrets'
 import {
   getParameter,
@@ -9,6 +9,7 @@ import {
 } from '@aws-lambda-powertools/parameters/ssm';
 import config from 'config'
 import { withTransaction, configure as configureDatabase } from '@services/db'
+import { configure as configureLogger } from '@services/logger'
 
 const app: Express = express();
 
@@ -49,8 +50,8 @@ app.get('/db', async (req: Request, res: Response) => {
 });
 
 export async function createApp() {
-  configureLogger(app)
   await configureSecrets(app)
+  configureLogger(app)
   configureDatabase(app)
   return app
 }

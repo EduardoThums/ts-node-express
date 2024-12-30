@@ -1,30 +1,32 @@
-import pg from 'pg'
+import pg, { ClientConfig } from 'pg'
 import { Express } from 'express'
+import logger from '@services/logger'
 // import { Client } from '@types/pg'
 const { Client } = pg
 
-let client: InstanceType<typeof Client>
+let config: ClientConfig
 
 export function configure(app: Express){
-    client = new Client({
+    config = {
         user: app.locals.config.get('DB_USER'),
         password: app.locals.config.get('DB_PASSWORD'),
         host: app.locals.config.get('DB_HOST'),
         port: app.locals.config.get('DB_PORT'),
-        database: app.locals.config.get('DB_NAME'),
-    })
+        database: app.locals.config.get('DB_NAME')    
+    }
 }
 
-// const client = 
-
-
-
 export async function withTransaction(callback: (client: InstanceType<typeof Client>) => Promise<void>) {
+    let client: InstanceType<typeof Client>
 
     try {
+        client = new Client(config)
+    
         await client.connect()
         
     } catch (error) {
+        logger?.error("unable to connect to the client")
+        throw error
         // handle with connect issue        
     }
 
