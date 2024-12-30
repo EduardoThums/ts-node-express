@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "git config core.hooksPath ./githooks",
     "build": "node build.js",
-    "start": "NODE_ENV=development tsx watch src/app.ts",
+    "start": "NODE_ENV=development tsx watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.{ts,js}'",
     "lint:fix": "eslint 'src/**/*.{ts,js}' --fix",

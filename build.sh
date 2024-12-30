@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-rm --recursive dist
+set -e
+
+rm --recursive --force dist
 npm run build
 # TODO: use esbuild-plugin-copy instead for a more dynamic approach
-cp --recursive --verbose ./config ./dist
+cp --recursive ./config ./dist
+
+find ./dist
