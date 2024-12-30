@@ -8,6 +8,7 @@ import {
   getParametersByName,
 } from '@aws-lambda-powertools/parameters/ssm';
 import config from 'config'
+import { withTransaction, configure as configureDatabase } from '@services/db'
 
 const app: Express = express();
 
@@ -35,8 +36,21 @@ app.get('/ping', (req: Request, res: Response) => {
   res.send('pong');
 });
 
+app.get('/db', async (req: Request, res: Response) => {
+  let response
+
+  await withTransaction(async client => {
+    const res = await client.query('SELECT $1::text as message', ['Hello world!'])
+    console.log() // Hello world!
+    response = res.rows[0].message
+  })
+  
+  res.send(response);
+});
+
 export async function createApp() {
   configureLogger(app)
   await configureSecrets(app)
+  configureDatabase(app)
   return app
 }

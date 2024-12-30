@@ -1,4 +1,8 @@
 {
   "LOG_LEVEL": "INFO",
-  "PORT": 3000
+  "DB_USER": null,
+  "DB_PASSWORD": null,
+  "DB_HOST": null,
+  "DB_PORT": null,
+  "DB_NAME": null
 }

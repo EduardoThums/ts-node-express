@@ -1,4 +1,8 @@
 {
   "LOG_LEVEL": "DEBUG",
-  "PORT": 3000
+  "DB_USER": "myuser",
+  "DB_PASSWORD": "mypassword",
+  "DB_HOST": "localhost",
+  "DB_PORT": 5432,
+  "DB_NAME": "mydatabases"
 }
