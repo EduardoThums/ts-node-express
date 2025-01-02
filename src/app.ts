@@ -10,6 +10,9 @@ import {
 import config from 'config'
 import { withTransaction, configure as configureDatabase } from '@services/db'
 import { configure as configureLogger } from '@services/logger'
+import logger from '@services/logger'
+import Router from 'express-promise-router'
+import { STATUS_CODES } from 'http';
 
 const app: Express = express();
 
@@ -25,6 +28,72 @@ async function configureSecrets(app: Express): Promise<void> {
 
   app.locals.config = config;
 }
+
+class ValidationError extends Error {
+  code?: string;
+  http_status_code: number;
+
+  constructor(message?: string, code?: string, http_status_code: number) {
+    super(message);
+    this.name = "ValidationError";
+    this.code = code;
+    this.http_status_code = http_status_code;
+  }
+}
+
+
+const router = Router();
+
+router.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`Start of the route: ${req.method} ${req.url}`)
+  next()
+  // res.status(500).json({ message: err.message });
+});
+
+router.get('/hello', function routeHandler(req, res) {
+  // throw new Error('Oops!');
+  res.send('world')
+});
+
+router.get('/error-sync', function routeHandler() {
+  throw new Error('Oops!');
+});
+
+router.get('/error-async', async function asyncRouteHandler(req, res, next) {
+  throw new ValidationError('Oops!', 'VALIDATION_ERROR', 400);
+    try {
+    throw new Error('Oops!');
+  } catch (err) {
+    // The `next()` function tells Express to go to the next middleware
+    // in the chain. Express doesn't handle async errors, so you need to
+    // report errors by calling `next()`.
+    return next(err);
+  }
+});
+
+router.use((err, req: Request, res: Response, next: NextFunction) => {
+  console.log(`error in ${req.method} ${req.url}`)
+
+  let code
+  let message
+  let http_status_code: number
+
+  if (err instanceof ValidationError) {
+    code = err.code
+    message = err.message
+    http_status_code = err.http_status_code
+
+  } else {
+    code = "INTERNAL_SERVER_ERROR"
+    message = err.message
+    http_status_code = 500
+  }
+
+  // console.log('handling error')
+  res.status(http_status_code).json({ message: err.message, code });
+});
+
+app.use(router)
 
 app.get('/ping', (req: Request, res: Response) => {
   // app.locals.logger.info("hello from /ping")
@@ -51,6 +120,7 @@ app.get('/db', async (req: Request, res: Response) => {
 
 export async function createApp() {
   await configureSecrets(app)
+  // find another way to init a global variable in a ES module
   configureLogger(app)
   configureDatabase(app)
   return app
