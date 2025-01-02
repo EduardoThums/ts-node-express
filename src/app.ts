@@ -10,14 +10,14 @@ import {
 import config from 'config'
 import { withTransaction, configure as configureDatabase } from '@services/db'
 import { configure as configureLogger } from '@services/logger'
-import logger from '@services/logger'
+import { isRunningInAws } from '@services/utils'
 import Router from 'express-promise-router'
 import { STATUS_CODES } from 'http';
 
 const app: Express = express();
 
 async function configureSecrets(app: Express): Promise<void> {
-  if (process.env.LAMBDA_TASK_ROOT) {
+  if (isRunningInAws()) {
     
     const parameter: string = await getParameter('/teste', { transform: 'json', maxAge: 120 });
     // const parameter: string = "{\"DB_PASSWORD\":1}";
